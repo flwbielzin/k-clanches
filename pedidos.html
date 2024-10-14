@@ -1,0 +1,129 @@
+<!-- pedidos.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Pedidos Pendentes</title>
+</head>
+<body>
+    <header>
+        <h1>Pedidos Pendentes</h1>
+    </header>
+
+    <main>
+        <section id="pedidos" class="pedidos-container">
+            <ul id="lista-pedidos">
+                <!-- Pedidos aparecerão aqui -->
+            </ul>
+            <button onclick="adicionarPedidoPrompt()">Adicionar Pedido</button> <!-- Botão para adicionar pedido -->
+        </section>
+        <section id="admin-section">
+            <h2>Gerenciamento de Pedidos</h2>
+            <button onclick="pedirSenhaParaExportar()">Exportar Pedidos para Excel</button>
+        </section>
+    </main>
+
+    <script>
+        // Função para adicionar um novo pedido
+        function adicionarPedido(nomeCliente, itens, total) {
+            const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+            pedidos.push({ nomeCliente, itens, total });
+            localStorage.setItem('pedidos', JSON.stringify(pedidos));
+            carregarPedidos(); // Atualiza a lista de pedidos exibida
+        }
+
+        // Função para pedir detalhes do novo pedido
+        function adicionarPedidoPrompt() {
+            const nomeCliente = prompt("Digite o nome do cliente:");
+            const itens = [];
+            let item;
+            do {
+                item = prompt("Digite um item (ou deixe em branco para finalizar):");
+                if (item) {
+                    const preco = parseFloat(prompt("Digite o preço do item:"));
+                    if (!isNaN(preco)) {
+                        itens.push({ item, preco });
+                    } else {
+                        alert("Preço inválido. Tente novamente.");
+                    }
+                }
+            } while (item);
+            const total = itens.reduce((acc, { preco }) => acc + preco, 0);
+            adicionarPedido(nomeCliente, itens, total);
+        }
+
+        // Função para pedir senha e exportar pedidos
+        function pedirSenhaParaExportar() {
+            const senha = prompt("Digite a senha de administrador:");
+            if (senha === "136401") {
+                exportarPedidos(); // Chama a função de exportação se a senha estiver correta
+            } else {
+                alert("Senha incorreta. Acesso negado.");
+            }
+        }
+
+        // Função para carregar pedidos do localStorage
+        function carregarPedidos() {
+            const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+            const listaPedidos = document.getElementById('lista-pedidos');
+            listaPedidos.innerHTML = '';
+
+            pedidos.forEach((pedido, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <p>Pedido ${index + 1} - Cliente: ${pedido.nomeCliente}</p>
+                    <ul>
+                        ${pedido.itens.map(({ item, preco }) => `<li>${item} - R$${preco.toFixed(2)}</li>`).join('')}
+                    </ul>
+                    <p>Total: R$${pedido.total.toFixed(2)}</p>
+                    <button onclick="concluirPedido(${index})">Concluir Pedido</button>
+                `;
+                listaPedidos.appendChild(li);
+            });
+        }
+
+        // Função para concluir um pedido
+        function concluirPedido(index) {
+            let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+            pedidos.splice(index, 1); // Remove o pedido concluído
+            localStorage.setItem('pedidos', JSON.stringify(pedidos)); // Atualiza o localStorage
+            carregarPedidos(); // Atualiza a lista de pedidos exibida
+        }
+
+        // Função para exportar pedidos para Excel
+        function exportarPedidos() {
+            const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+            console.log("Pedidos antes da exportação:", pedidos); // Debugging
+            
+            let csvContent = "data:text/csv;charset=utf-8," 
+                + "Cliente,Item,Preço,Total\n"; // Cabeçalho do CSV
+            
+            // Adiciona cada item do pedido ao CSV
+            pedidos.forEach(pedido => {
+                pedido.itens.forEach(item => {
+                    csvContent += `${pedido.nomeCliente},${item.item},R$${item.preco.toFixed(2)},R$${pedido.total.toFixed(2)}\n`;
+                });
+            });
+
+            // Calcular total ganho
+            const totalGanho = pedidos.reduce((acc, pedido) => acc + pedido.total, 0);
+            csvContent += `,,Total Ganho:,R$${totalGanho.toFixed(2)}`; // Adiciona o total ganho
+
+            console.log("Conteúdo do CSV:", csvContent); // Debugging
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "pedidos.csv");
+            document.body.appendChild(link);
+            link.click(); // Inicia o download
+            document.body.removeChild(link); // Remove o link do DOM
+        }
+
+        // Chama a função para carregar pedidos quando a página é carregada
+        window.onload = carregarPedidos;
+    </script>
+</body>
+</html>

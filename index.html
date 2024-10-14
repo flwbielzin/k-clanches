@@ -1,0 +1,288 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>K&C Lanche’s</h1>
+        <h1>Cardápio</h1>
+        
+    </header>
+
+    <main>
+        <section id="menu" class="container-hamburguer">
+            <h2>Hamburguês</h2>
+            <ul>
+                <li>
+                    <h3>X- BURGUER</h3>
+                    <p>Pão, carne e queijo, salada. Preço: R$8,00</p>
+                    <label>Escolha os ingredientes a remover:</label><br>
+                    <input type="checkbox" id="salada" value="Salada"> Salada<br>
+                    <input type="checkbox" id="queijo" value="Queijo"> Queijo<br>
+                    <input type="checkbox" id="carne" value="Carne"> Carne<br>
+                    <button onclick="adicionarAoCarrinho('Hambúrguer', 8)">Adicionar ao Carrinho</button>
+                </li>
+                <li>
+                    <h3>X- TUDO</h3>
+                    <p>Pão, carne, queijo, presunto, ovo, linguiça, bacon, salada, batata palha e molho. Preço: R$12,00</p>
+                    <label>Escolha os ingredientes a remover:</label><br>
+                    <input type="checkbox" id="salada" value="Salada"> Salada<br>
+                    <input type="checkbox" id="queijo" value="Queijo"> Queijo<br>
+                    <input type="checkbox" id="carne" value="Carne"> Carne<br>
+                    <button onclick="adicionarAoCarrinho('Hambúrguer', 12)">Adicionar ao Carrinho</button>
+                </li>
+                <li>
+                    <h3>X- DUPLO</h3>
+                    <p>Pão, 2 carnes, 2 ovos, queijo, presunto, bacon, salada, batata palha e molho. Preço: R$15,00</p>
+                    <label>Escolha os ingredientes a remover:</label><br>
+                    <input type="checkbox" id="salada" value="Salada"> Salada<br>
+                    <input type="checkbox" id="queijo" value="Queijo"> Queijo<br>
+                    <input type="checkbox" id="carne" value="Carne"> Carne<br>
+                    <button onclick="adicionarAoCarrinho('Pizza', 15)">Adicionar ao Carrinho</button>
+                </li>
+                <li>
+                    <h3>X- TRIPLO</h3>
+                    <p>Pão, 3 carnes, 2 ovos, queijo, presunto, bacon, salada, batata palha e molho . Preço: R$18,00</p>
+                    <label>Escolha os ingredientes a remover:</label><br>
+                    <input type="checkbox" id="salada" value="Salada"> Salada<br>
+                    <input type="checkbox" id="queijo" value="Queijo"> Queijo<br>
+                    <input type="checkbox" id="carne" value="Carne"> Carne<br>
+                    <button onclick="adicionarAoCarrinho('Pizza', 18)">Adicionar ao Carrinho</button>
+                </li>
+                
+            </ul>
+
+        </section>
+
+        <section id="menu2" class="container-trios">
+            <h2>TRIOS</h2>
+            <ul>
+                <li>
+                    <h3>TRIO X-BURGUER</h3>
+                    <p>Pão, carne, queijo, salada, molho + batata frita.</p>
+                    <label>Escolha os ingredientes a remover:</label><br>
+                    <input type="checkbox" id="salada" value="Salada"> Salada<br>
+                    <input type="checkbox" id="queijo" value="Queijo"> Queijo<br>
+                    <input type="checkbox" id="carne" value="Carne"> Carne<br>
+                <li>
+                    <h3>Opções de Bebida:</h3>
+                    <p>
+                        <input type="radio" id="guaravita" name="bebida" value="Guaravita">
+                        <label for="guaravita">Guaravita. Preço: R$12,00</label>
+                        <input type="radio" id="refrigerante" name="bebida" value="Refrigerante">
+                        <label for="refrigerante">Refrigerante. Preço: R$15,00</label><br>
+
+                    </p>
+                </li><!--Opções de Bebida: -->
+
+                <button onclick="adicionarAoCarrinho('TRIO X-BURGUER guaravita', 12)">Adicionar ao Carrinho</button>
+                <button onclick="adicionarAoCarrinho('TRIO X-BURGUER refrigerante', 15)">Adicionar ao Carrinho</button>
+
+
+                </li><!--TRIO X-BURGUER -->
+
+                <li>
+                    <h3>TRIO X-TUDO</h3>
+                    <p>Pão, carne, queijo, presunto, ovo, linguiça, bacon, salada, batata palha, molho + batata frita.</p>
+                    <label>Escolha os ingredientes a remover:</label><br>
+                    <input type="checkbox" id="salada" value="Salada"> Salada<br>
+                    <input type="checkbox" id="queijo" value="Queijo"> Queijo<br>
+                    <input type="checkbox" id="carne" value="Carne"> Carne<br>
+                <li>
+                    <h3>Opções de Bebida:</h3>
+                    <p>
+                        <input type="radio" id="guaravita" name="bebida" value="Guaravita">
+                        <label for="guaravita">Guaravita. Preço: R$16,00</label>
+                        <input type="radio" id="refrigerante" name="bebida" value="Refrigerante">
+                        <label for="refrigerante">Refrigerante. Preço: R$19,00</label><br>
+
+                    </p>
+                </li><!--Opções de Bebida: -->
+
+                <button onclick="adicionarAoCarrinho('TRIO X-BURGUER guaravita', 16)">Adicionar ao Carrinho</button>
+                <button onclick="adicionarAoCarrinho('TRIO X-BURGUER refrigerante', 19)">Adicionar ao Carrinho</button>
+
+
+                </li><!--TRIO X-TUDO-->
+                <li>
+                    <h3>TRIO X- DUPLO</h3>
+                    <p> Pão, 2 carnes, 2 ovos, queijo, bacon, salada, molho + batata frita.</p>
+                    <label>Escolha os ingredientes a remover:</label><br>
+                    <input type="checkbox" id="salada" value="Salada"> Salada<br>
+                    <input type="checkbox" id="queijo" value="Queijo"> Queijo<br>
+                    <input type="checkbox" id="carne" value="Carne"> Carne<br>
+                <li>
+                    <h3>Opções de Bebida:</h3>
+                    <p>
+                        <input type="radio" id="guaravita" name="bebida" value="Guaravita">
+                        <label for="guaravita">Guaravita. Preço: R$19,00</label>
+                        <input type="radio" id="refrigerante" name="bebida" value="Refrigerante">
+                        <label for="refrigerante">Refrigerante. Preço: R$22,00</label><br>
+
+                    </p>
+                </li><!--Opções de Bebida: -->
+
+                <button onclick="adicionarAoCarrinho('TRIO X-BURGUER guaravita', 19)">Adicionar ao Carrinho</button>
+                <button onclick="adicionarAoCarrinho('TRIO X-BURGUER refrigerante', 22)">Adicionar ao Carrinho</button>
+
+
+                </li><!--TRIO X- DUPLO-->
+
+            </ul>
+
+        </section>
+
+        <section id="menu3" class="container-cachorro-quente">
+            <h2>Cachorros Quentes</h2>
+            <ul>
+                <li>
+                    <h3>Cachorro Quente Salsicha</h3>
+
+                <li>
+                    <h3>Opções de Cachorro Quente:</h3>
+                    <p>
+                        <input type="radio" id="salsicha" name="salsicha" value="salsicha">
+                        <label for="salsicha">1 salsicha. Preço: R$10,00</label>
+                        <input type="radio" id="salsicha" name="salsicha" value="salsicha">
+                        <label for="refrigerante">2 Salsicha. Preço: R$12,00</label><br>
+
+                    </p>
+                    <label>Escolha os ingredientes a remover:</label><br>
+                    <input type="checkbox" id="salada" value="Salada"> Salada<br>
+                    <input type="checkbox" id="queijo" value="Queijo"> Queijo<br>
+                    <input type="checkbox" id="carne" value="Carne"> Carne<br>
+                </li><!--Opções de salsicha: -->
+
+                <button onclick="adicionarAoCarrinho('Cachorro Quente 1 Salsicha', 10)">Adicionar ao Carrinho</button>
+                <button onclick="adicionarAoCarrinho('Cachorro Quente 2 Salsicha', 12)">Adicionar ao Carrinho</button>
+
+
+                </li><!--Salsicha-->
+
+
+            </ul>
+
+            <ul>
+                <li>
+                    <h3>Cachorro Quente Linguiça</h3>
+
+                <li>
+                    <h3>Opções de Cachorro Quente:</h3>
+                    <p>
+                        <input type="radio" id="linguiça" name="linguiça" value="linguiça">
+                        <label for="salsicha">1 Linguiça. Preço: R$12,00</label>
+                        <input type="radio" id="linguiça" name="linguiça" value="linguiça">
+                        <label for="refrigerante">2 Linguiça. Preço: R$14,00</label><br>
+
+                    </p>
+                    <label>Escolha os ingredientes a remover:</label><br>
+                    <input type="checkbox" id="salada" value="Salada"> Salada<br>
+                    <input type="checkbox" id="queijo" value="Queijo"> Queijo<br>
+                    <input type="checkbox" id="carne" value="Carne"> Carne<br>
+                </li><!--Opções de salsicha: -->
+
+                <button onclick="adicionarAoCarrinho('Cachorro Quente 1 Linguiça', 12)">Adicionar ao Carrinho</button>
+                <button onclick="adicionarAoCarrinho('Cachorro Quente 2 Linguiça', 14)">Adicionar ao Carrinho</button>
+
+
+                </li><!--Linguiça -->
+
+
+            </ul>
+
+        </section>
+        <section id="menu4" class="container-batatas">
+            <h2>Batatas Fritas</h2>
+            <ul>
+                
+                    <h3>Opções de Batata Frita:</h3>
+                    <p>
+                        <input type="radio" id="P" name="P" value=">
+                        <label for="P">P. Preço: R$10,00</label>
+
+                        <input type="radio" id="M" name="M" value="M">
+                        <label for="G">M. Preço: R$12,00</label><br>
+
+                        <input type="radio" id="G" name="G" value="G">
+                        <label for="G">G. Preço: R$12,00</label><br>
+
+                    </p>
+                    <label>Escolha os ingredientes a remover:</label><br>
+                    <input type="checkbox" id="salada" value="Salada"> Salada<br>
+                    <input type="checkbox" id="queijo" value="Queijo"> Queijo<br>
+                    <input type="checkbox" id="carne" value="Carne"> Carne<br>
+                
+
+                <button onclick="adicionarAoCarrinho('Batata P', 10)">Adicionar ao Carrinho</button>
+                <button onclick="adicionarAoCarrinho('Batata M', 12)">Adicionar ao Carrinho</button>
+                <button onclick="adicionarAoCarrinho('Batata G', 12)">Adicionar ao Carrinho</button>
+
+                <h3>Opções de Batata Frita Maluca:</h3>
+                    <p>
+                        <input type="radio" id="P" name="P" value=">
+                        <label for="P">P. Preço: R$10,00</label>
+
+                        <input type="radio" id="M" name="M" value="M">
+                        <label for="G">M. Preço: R$12,00</label><br>
+
+                        <input type="radio" id="G" name="G" value="G">
+                        <label for="G">G. Preço: R$12,00</label><br>
+
+                    </p>
+                    
+                
+
+                <button onclick="adicionarAoCarrinho('Batata P', 10)">Adicionar ao Carrinho</button>
+                <button onclick="adicionarAoCarrinho('Batata M', 12)">Adicionar ao Carrinho</button>
+                <button onclick="adicionarAoCarrinho('Batata G', 12)">Adicionar ao Carrinho</button>
+            </ul>
+
+
+        </section>
+
+
+
+        <section id="carrinho" class="carrinho-container">
+            <h2>Seu Carrinho</h2>
+            <ul id="itens-carrinho">
+                <!-- Itens adicionados ao carrinho aparecerão aqui -->
+            </ul>
+            <p id="total">Total: R$0,00</p>
+            <button onclick="fazerPedido()">Fazer Pedido</button>
+        </section>
+
+        <section id="pedidos" class="pedidos-container">
+            <h2>Pedidos Pendentes</h2>
+            <ul id="lista-pedidos">
+                <!-- Pedidos aparecerão aqui -->
+            </ul>
+            <button onclick="window.open('pedidos.html', '_blank')">Ver Pedidos Pendentes</button>
+
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 K&C Lanche’s. Todos os direitos reservados.</p> 
+    </footer>
+    <script src="scripts.js"></script>
+   
+</body>
+
+</html> 

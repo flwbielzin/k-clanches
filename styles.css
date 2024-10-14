@@ -1,0 +1,85 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #8d8a8a;
+}
+
+header {
+    background-color: #ff8c00;
+    color: rgb(0, 0, 0);
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 2rem;
+}
+
+section {
+    background-color: rgb(194, 174, 138);
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 45%;
+    margin-bottom: 2rem;
+}
+
+
+h2 {
+    color: #ff8c00;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 1rem;
+}
+
+button {
+    background-color: #ff8c00;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #e07b00;
+}
+
+#total {
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+#pedidos {
+    width: 100%;
+}
+/* Estilos do Container dos Pedidos */
+#lista-pedidos {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que os pedidos quebrem para a próxima linha se não houver espaço suficiente */
+    justify-content: space-between; /* Distribui os pedidos uniformemente ao longo do eixo principal (horizontalmente) */
+}
+
+/* Estilos dos Pedidos */
+#lista-pedidos li {
+    flex-basis: 45%; /* Define a largura inicial de cada pedido */
+    margin-bottom: 0.5rem; /* Reduz a margem inferior entre os pedidos */
+    margin-right: 1rem; /* Adiciona uma margem direita entre os pedidos */
+}
