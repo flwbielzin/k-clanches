@@ -121,4 +121,21 @@ function adicionarAoCarrinhoComExclusoes(item, preco, formId) {
 
     let descricao = `${item} (Sem: ${exclusoes.join(', ')})`;
     adicionarAoCarrinho(descricao, preco);
+
+// efeitos css
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Se você quiser manter o observer, mas não é necessário para animação ao hover
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            section.addEventListener('mouseenter', () => {
+                section.classList.add('animate'); // Adiciona a classe para ativar a animação
+            });
+    
+            section.addEventListener('mouseleave', () => {
+                section.classList.remove('animate'); // Remove a classe ao sair
+            });
+        });
+    });
+    
 }
