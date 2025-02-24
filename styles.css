@@ -145,3 +145,51 @@ footer p {
         flex-basis: 100%;
     }
 }
+
+/* Estilos para cards de pedidos */
+.pedido-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Cores para diferentes status */
+.pedido-card.pendente {
+    border-left: 5px solid #ffd700;
+}
+
+.pedido-card.em-preparo {
+    border-left: 5px solid #ff8c00;
+}
+
+.pedido-card.saiu-para-entrega {
+    border-left: 5px solid #4169e1;
+}
+
+.pedido-card.entregue {
+    border-left: 5px solid #32cd32;
+}
+
+.status-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Estilo para tempo estimado */
+.tempo-estimado {
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+/* Remover estilos não utilizados */
+.modal,
+.modal-content,
+.forma-pagamento {
+    display: none;
+}

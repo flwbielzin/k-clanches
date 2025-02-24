@@ -5,125 +5,361 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
-    <title>Pedidos Pendentes</title>
-</head>
-<body>
-    <header>
-        <h1>Pedidos Pendentes</h1>
-    </header>
-
-    <main>
-        <section id="pedidos" class="pedidos-container">
-            <ul id="lista-pedidos">
-                <!-- Pedidos aparecerão aqui -->
-            </ul>
-            <button onclick="adicionarPedidoPrompt()">Adicionar Pedido</button> <!-- Botão para adicionar pedido -->
-        </section>
-        <section id="admin-section">
-            <h2>Gerenciamento de Pedidos</h2>
-            <button onclick="pedirSenhaParaExportar()">Exportar Pedidos para Excel</button>
-        </section>
-    </main>
-
-    <script>
-        // Função para adicionar um novo pedido
-        function adicionarPedido(nomeCliente, itens, total) {
-            const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
-            pedidos.push({ nomeCliente, itens, total });
-            localStorage.setItem('pedidos', JSON.stringify(pedidos));
-            carregarPedidos(); // Atualiza a lista de pedidos exibida
+    <title>K&C Lanche's - Gerenciamento de Pedidos</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff8c00;
+            --secondary-color: #bd9067;
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --success-color: #32cd32;
+            --warning-color: #ffd700;
+            --info-color: #4169e1;
         }
 
-        // Função para pedir detalhes do novo pedido
-        function adicionarPedidoPrompt() {
-            const nomeCliente = prompt("Digite o nome do cliente:");
-            const itens = [];
-            let item;
-            do {
-                item = prompt("Digite um item (ou deixe em branco para finalizar):");
-                if (item) {
-                    const preco = parseFloat(prompt("Digite o preço do item:"));
-                    if (!isNaN(preco)) {
-                        itens.push({ item, preco });
-                    } else {
-                        alert("Preço inválido. Tente novamente.");
-                    }
-                }
-            } while (item);
-            const total = itens.reduce((acc, { preco }) => acc + preco, 0);
-            adicionarPedido(nomeCliente, itens, total);
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
         }
 
-        // Função para pedir senha e exportar pedidos
-        function pedirSenhaParaExportar() {
-            const senha = prompt("Digite a senha de administrador:");
-            if (senha === "136401") {
-                exportarPedidos(); // Chama a função de exportação se a senha estiver correta
-            } else {
-                alert("Senha incorreta. Acesso negado.");
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .filtros select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .action-buttons button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .action-buttons button:hover {
+            background-color: #e07b00;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            margin: 0 0 10px 0;
+            color: var(--text-color);
+            font-size: 16px;
+        }
+
+        .stat-card p {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .pedidos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .pedido-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .pedido-card h3 {
+            margin: 0 0 15px 0;
+            color: var(--primary-color);
+        }
+
+        .pedido-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .pedido-card li {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .status-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .status-buttons button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            background-color: var(--primary-color);
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .status-buttons button:hover {
+            background-color: #e07b00;
+        }
+
+        .pedido-card.pendente { border-left: 5px solid var(--warning-color); }
+        .pedido-card.em-preparo { border-left: 5px solid var(--primary-color); }
+        .pedido-card.concluido { border-left: 5px solid var(--success-color); }
+
+        @media (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        // Função para carregar pedidos do localStorage
-        function carregarPedidos() {
-            const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
-            const listaPedidos = document.getElementById('lista-pedidos');
-            listaPedidos.innerHTML = '';
+        @media (max-width: 600px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
 
-            pedidos.forEach((pedido, index) => {
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    <p>Pedido ${index + 1} - Cliente: ${pedido.nomeCliente}</p>
+            .pedidos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>K&C Lanche's - Gerenciamento de Pedidos</h1>
+    </header>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="filtros">
+                <input type="text" class="search-box" placeholder="Buscar pedidos..." onkeyup="filtrarPedidos(this.value)">
+                <select onchange="filtrarPorStatus(this.value)">
+                    <option value="todos">Todos os Status</option>
+                    <option value="pendente">Pendente</option>
+                    <option value="em-preparo">Em Preparo</option>
+                    <option value="concluido">Concluído</option>
+                </select>
+            </div>
+            <div class="action-buttons">
+                <button onclick="limparPedidosConcluidos()">
+                    <span class="material-icons">delete_sweep</span>
+                    Limpar Concluídos
+                </button>
+                <button onclick="exportarPedidos()">
+                    <span class="material-icons">download</span>
+                    Exportar
+                </button>
+            </div>
+        </aside>
+
+    <main>
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Pedidos Pendentes</h3>
+                    <p id="pedidos-pendentes">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Em Preparo</h3>
+                    <p id="pedidos-preparo">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total do Dia</h3>
+                    <p id="total-dia">R$ 0,00</p>
+                </div>
+            </div>
+
+            <div class="pedidos-grid" id="pedidos-grid"></div>
+    </main>
+    </div>
+
+    <script>
+        function atualizarPedidosGrid() {
+            const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+            const grid = document.getElementById('pedidos-grid');
+            grid.innerHTML = '';
+
+            // Atualizar estatísticas
+            const stats = {
+                pendente: 0,
+                'em-preparo': 0,
+                totalDia: 0
+            };
+
+            pedidos.forEach(pedido => {
+                const card = document.createElement('div');
+                card.className = `pedido-card ${pedido.status.toLowerCase()}`;
+                
+                // Atualizar contadores
+                if (pedido.status === 'Pendente') stats.pendente++;
+                if (pedido.status === 'Em Preparo') stats['em-preparo']++;
+                stats.totalDia += pedido.total;
+                
+                card.innerHTML = `
+                    <h3>Pedido #${pedido.id}</h3>
+                    <p><strong>Cliente:</strong> ${pedido.nomeCliente}</p>
+                    <p><strong>Hora:</strong> ${pedido.horaPedido}</p>
+                    <p><strong>Status:</strong> ${pedido.status}</p>
                     <ul>
-                        ${pedido.itens.map(({ item, preco }) => `<li>${item} - R$${preco.toFixed(2)}</li>`).join('')}
+                        ${pedido.itens.map(item => `
+                            <li>${item.item} - R$${item.preco.toFixed(2)}</li>
+                        `).join('')}
                     </ul>
-                    <p>Total: R$${pedido.total.toFixed(2)}</p>
-                    <button onclick="concluirPedido(${index})">Concluir Pedido</button>
+                    <p><strong>Total:</strong> R$${pedido.total.toFixed(2)}</p>
+                    <div class="status-buttons">
+                        ${pedido.status === 'Pendente' ? `
+                            <button onclick="atualizarStatus(${pedido.id}, 'Em Preparo')">
+                                <span class="material-icons">restaurant</span>
+                                Preparar
+                            </button>
+                        ` : ''}
+                        ${pedido.status === 'Em Preparo' ? `
+                            <button onclick="atualizarStatus(${pedido.id}, 'Concluído')">
+                                <span class="material-icons">check_circle</span>
+                                Concluir
+                            </button>
+                        ` : ''}
+                    </div>
                 `;
-                listaPedidos.appendChild(li);
+
+                grid.appendChild(card);
+            });
+
+            // Atualizar números no dashboard
+            document.getElementById('pedidos-pendentes').textContent = stats.pendente;
+            document.getElementById('pedidos-preparo').textContent = stats['em-preparo'];
+            document.getElementById('total-dia').textContent = `R$ ${stats.totalDia.toFixed(2)}`;
+        }
+
+        function filtrarPedidos(termo) {
+            const cards = document.querySelectorAll('.pedido-card');
+            cards.forEach(card => {
+                const texto = card.textContent.toLowerCase();
+                card.style.display = texto.includes(termo.toLowerCase()) ? 'block' : 'none';
             });
         }
 
-        // Função para concluir um pedido
-        function concluirPedido(index) {
-            let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
-            pedidos.splice(index, 1); // Remove o pedido concluído
-            localStorage.setItem('pedidos', JSON.stringify(pedidos)); // Atualiza o localStorage
-            carregarPedidos(); // Atualiza a lista de pedidos exibida
+        function filtrarPorStatus(status) {
+            const cards = document.querySelectorAll('.pedido-card');
+            cards.forEach(card => {
+                if (status === 'todos') {
+                    card.style.display = 'block';
+                    } else {
+                    card.style.display = card.classList.contains(status) ? 'block' : 'none';
+                }
+            });
         }
 
-        // Função para exportar pedidos para Excel
+        function atualizarStatus(id, novoStatus) {
+            const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+            const pedido = pedidos.find(p => p.id === id);
+            if (pedido) {
+                pedido.status = novoStatus;
+                localStorage.setItem('pedidos', JSON.stringify(pedidos));
+                atualizarPedidosGrid();
+            }
+        }
+
+        function limparPedidosConcluidos() {
+            if (confirm('Deseja realmente remover todos os pedidos concluídos?')) {
+            const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+                const pedidosAtivos = pedidos.filter(pedido => pedido.status !== 'Concluído');
+                localStorage.setItem('pedidos', JSON.stringify(pedidosAtivos));
+                atualizarPedidosGrid();
+            }
+        }
+
         function exportarPedidos() {
             const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
-            console.log("Pedidos antes da exportação:", pedidos); // Debugging
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "ID,Cliente,Data/Hora,Status,Itens,Total\n";
             
-            let csvContent = "data:text/csv;charset=utf-8," 
-                + "Cliente,Item,Preço,Total\n"; // Cabeçalho do CSV
-            
-            // Adiciona cada item do pedido ao CSV
             pedidos.forEach(pedido => {
-                pedido.itens.forEach(item => {
-                    csvContent += `${pedido.nomeCliente},${item.item},R$${item.preco.toFixed(2)},R$${pedido.total.toFixed(2)}\n`;
-                });
+                const itens = pedido.itens.map(item => `${item.item}`).join('; ');
+                csvContent += `${pedido.id},${pedido.nomeCliente},${pedido.horaPedido},${pedido.status},"${itens}",${pedido.total}\n`;
             });
-
-            // Calcular total ganho
-            const totalGanho = pedidos.reduce((acc, pedido) => acc + pedido.total, 0);
-            csvContent += `,,Total Ganho:,R$${totalGanho.toFixed(2)}`; // Adiciona o total ganho
-
-            console.log("Conteúdo do CSV:", csvContent); // Debugging
 
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "pedidos.csv");
+            link.setAttribute("download", `pedidos_${new Date().toLocaleDateString()}.csv`);
             document.body.appendChild(link);
-            link.click(); // Inicia o download
-            document.body.removeChild(link); // Remove o link do DOM
+            link.click();
+            document.body.removeChild(link);
         }
 
-        // Chama a função para carregar pedidos quando a página é carregada
-        window.onload = carregarPedidos;
+        // Atualizar a cada 5 segundos
+        setInterval(atualizarPedidosGrid, 5000);
+        
+        // Primeira atualização
+        atualizarPedidosGrid();
     </script>
 </body>
 </html>
