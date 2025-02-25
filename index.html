@@ -40,19 +40,21 @@
 
         .menu-area {
             padding: 20px;
-            padding-bottom: 80px; /* Espaço para o botão do carrinho fixo */
+            padding-bottom: 80px;
+            /* Espaço para o botão do carrinho fixo */
         }
 
         .carrinho-area {
             position: fixed;
-            right: -350px; /* Voltar para largura fixa */
+            right: -350px;
+            /* Voltar para largura fixa */
             top: 0;
             width: 350px;
             height: 100vh;
             background: var(--card-bg);
             transition: right 0.3s ease;
             z-index: 999;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
             padding: 20px;
         }
 
@@ -73,11 +75,13 @@
             padding: 10px 0;
             margin-bottom: 20px;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
+            /* Firefox */
         }
 
         .categorias::-webkit-scrollbar {
-            display: none; /* Chrome, Safari */
+            display: none;
+            /* Chrome, Safari */
         }
 
         .categoria-btn {
@@ -90,14 +94,14 @@
             white-space: nowrap;
             transition: all 0.3s ease;
             font-size: 1.1em;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .categoria-btn.active,
         .categoria-btn:hover {
             background: var(--primary-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255,140,0,0.3);
+            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
         }
 
         .produto-card {
@@ -126,6 +130,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .produto-imagem span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            gap: 5px;
+            font-size: 38px;
+        }
+
+        /* Ajuste específico para trios que têm 3 emojis */
+        [data-categoria="trios"] .produto-imagem span {
+            font-size: 32px;
         }
 
         .produto-info {
@@ -183,7 +201,7 @@
             justify-content: center;
             font-size: 1.2em;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .quantidade-btn:hover {
@@ -206,13 +224,13 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .finalizar-pedido:hover {
             background: var(--hover-color);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255,140,0,0.3);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.3);
         }
 
         .total {
@@ -240,7 +258,7 @@
             align-items: center;
             gap: 10px;
             font-size: 1.1em;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
             text-decoration: none;
         }
@@ -248,7 +266,7 @@
         .admin-btn:hover {
             background: var(--hover-color);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255,140,0,0.3);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.3);
         }
 
         .modal {
@@ -258,7 +276,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 1000;
         }
 
@@ -320,14 +338,14 @@
             border-radius: 50%;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             transition: all 0.3s ease;
         }
 
         .toggle-btn:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(255,140,0,0.4);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
         }
 
         .carrinho-contador {
@@ -370,6 +388,7 @@
                 opacity: 0;
                 transform: translateX(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -503,6 +522,7 @@
 
         /* Ajustes de acessibilidade para toque */
         @media (hover: none) {
+
             .categoria-btn,
             .produto-card,
             .quantidade-btn,
@@ -618,17 +638,19 @@
         .toggle-cozinha {
             position: fixed;
             bottom: 20px;
-            right: 90px; /* Posiciona ao lado do carrinho */
+            right: 90px;
+            /* Posiciona ao lado do carrinho */
             z-index: 1000;
         }
 
         .cozinha-btn {
-            background: #4CAF50; /* Cor diferente para diferenciar do carrinho */
+            background: #4CAF50;
+            /* Cor diferente para diferenciar do carrinho */
         }
 
         .cozinha-btn:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(76,175,80,0.4);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
         }
 
         /* Ajustar o container dos botões flutuantes */
@@ -647,6 +669,87 @@
                 right: 85px;
             }
         }
+
+        .opcoes-acai {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #3d3d3d;
+            border-radius: 10px;
+        }
+
+        .opcoes-acai h3 {
+            margin: 15px 0 10px;
+            color: var(--primary-color);
+        }
+
+        .opcoes-acai h3:first-child {
+            margin-top: 0;
+        }
+
+        .opcoes-acai label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            margin: 5px 0;
+            background: #2d2d2d;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .opcoes-acai label:hover {
+            background: #404040;
+        }
+
+        .exclusoes-lista {
+            max-height: 200px;
+            /* Altura máxima */
+            overflow-y: auto;
+            /* Adiciona scroll vertical */
+            padding-right: 10px;
+            /* Espaço para o scroll */
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #3d3d3d;
+            border-radius: 10px;
+        }
+
+        /* Estilizar a barra de rolagem */
+        .exclusoes-lista::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .exclusoes-lista::-webkit-scrollbar-track {
+            background: #2d2d2d;
+            border-radius: 10px;
+        }
+
+        .exclusoes-lista::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        .exclusoes-lista::-webkit-scrollbar-thumb:hover {
+            background: var(--hover-color);
+        }
+
+        /* Ajustar o espaçamento dos itens */
+        .exclusoes-lista label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            margin: 5px 0;
+            background: #2d2d2d;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .exclusoes-lista label:hover {
+            background: #404040;
+        }
     </style>
 </head>
 
@@ -657,6 +760,8 @@
                 <button class="categoria-btn active" data-categoria="todos">Todos</button>
                 <button class="categoria-btn" data-categoria="hamburguers">Hamburguers</button>
                 <button class="categoria-btn" data-categoria="trios">Trios</button>
+                <button class="categoria-btn" data-categoria="hotdogs">Cachorro Quente</button>
+                <button class="categoria-btn" data-categoria="porcoes">Porções</button>
                 <button class="categoria-btn" data-categoria="batatas">Batatas</button>
                 <button class="categoria-btn" data-categoria="pizzas">Pizzas</button>
                 <button class="categoria-btn" data-categoria="acai">Açaí</button>
@@ -665,37 +770,106 @@
 
             <div class="produtos-grid">
                 <!-- Hamburguers -->
-                <div class="produto-card" data-categoria="hamburguers" onclick="mostrarDetalhes('X-BURGUER', 8, ['Salada', 'Queijo', 'Carne'])">
+                <div class="produto-card" data-categoria="hamburguers"
+                    onclick="mostrarDetalhes('X-BURGUER', 9, ['Salada', 'Queijo', 'Carne'])">
                     <div class="produto-imagem">
-                        <span class="material-icons" style="font-size: 48px;">lunch_dining</span>
+                        <span style="font-size: 48px;">🍔</span>
                     </div>
                     <div class="produto-info">
                         <div class="produto-nome">X-BURGUER</div>
                         <div class="produto-descricao">Pão, carne, queijo, salada</div>
-                        <div class="produto-preco">R$ 8,00</div>
+                        <div class="produto-preco">R$ 9,00</div>
                     </div>
                 </div>
 
-                <div class="produto-card" data-categoria="hamburguers" onclick="mostrarDetalhes('X-SALADA', 10, ['Salada', 'Queijo', 'Carne'])">
+                <div class="produto-card" data-categoria="hamburguers"
+                    onclick="mostrarDetalhes('X-TUDO', 13, ['Salada', 'Queijo', 'Carne', 'Ovo', 'Bacon', 'Linguiça', 'Batata Palha', 'Molho', 'Presunto'])">
                     <div class="produto-imagem">
-                        <span class="material-icons" style="font-size: 48px;">lunch_dining</span>
+                        <span style="font-size: 48px;">🍔🍟🥤</span>
                     </div>
                     <div class="produto-info">
-                        <div class="produto-nome">X-SALADA</div>
-                        <div class="produto-descricao">Pão, hambúrguer, queijo, alface, tomate</div>
-                        <div class="produto-preco">R$ 10,00</div>
+                        <div class="produto-nome">X-TUDO</div>
+                        <div class="produto-descricao">Pão, carne, queijo, presunto, ovo, linguiça, bacon, salada,
+                            batata palha e molho</div>
+                        <div class="produto-preco">R$ 13,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="hamburguers"
+                    onclick="mostrarDetalhes('X-DUPLO', 16, ['Salada', 'Queijo', 'Carne', 'Ovo', 'Bacon', 'Linguiça', 'Batata Palha', 'Molho', 'Presunto'])">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🍔🍟🥤</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">X-DUPLO</div>
+                        <div class="produto-descricao">Pão, 2 carnes, 1 ovos, queijo, presunto, bacon, salada, batata
+                            palha e molho.</div>
+                        <div class="produto-preco">R$ 16,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="hamburguers"
+                    onclick="mostrarDetalhes('X-TRIPLO', 21, ['Salada', 'Queijo', 'Carne', 'Ovo', 'Bacon', 'Linguiça', 'Batata Palha', 'Molho', 'Presunto'])">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🍔🍟🥤</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">X-TRIPLO</div>
+                        <div class="produto-descricao">Pão, 3 carnes, 2 ovos, queijo, presunto, bacon, salada, batata
+                            palha e molho.</div>
+                        <div class="produto-preco">R$ 21,00</div>
                     </div>
                 </div>
 
                 <!-- Trios -->
-                <div class="produto-card" data-categoria="trios" onclick="mostrarDetalhes('TRIO X-TUDO', 25, ['Salada', 'Queijo', 'Carne', 'Bacon'])">
+                <div class="produto-card" data-categoria="trios"
+                    onclick="mostrarDetalhes('TRIO X-BURGUER', 14, ['Salada', 'Queijo', 'Carne', 'Ovo', 'Bacon', 'Linguiça', 'Batata Palha', 'Molho', 'Presunto'])">
                     <div class="produto-imagem">
-                        <span class="material-icons" style="font-size: 48px;">fastfood</span>
+                        <span style="font-size: 48px;">🍔🍟🥤</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">TRIO X-BURGUER</div>
+                        <div class="produto-descricao">Pão, carne, queijo, salada + batata frita</div>
+                        <div class="produto-preco">A partir de R$ 14,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="trios"
+                    onclick="mostrarDetalhes('TRIO X-TUDO', 18, ['Salada', 'Queijo', 'Carne', 'Ovo', 'Bacon', 'Linguiça', 'Batata Palha', 'Molho', 'Presunto'])">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🍔🍟🥤</span>
                     </div>
                     <div class="produto-info">
                         <div class="produto-nome">TRIO X-TUDO</div>
-                        <div class="produto-descricao">X-Tudo + Batata + Bebida</div>
+                        <div class="produto-descricao">Pão, carne, queijo, presunto, ovo, linguiça, bacon, salada,
+                            batata palha e molho</div>
+                        <div class="produto-preco">A partir de R$ 18,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="trios"
+                    onclick="mostrarDetalhes('TRIO X-DUPLO', 21, ['Salada', 'Queijo', 'Carne', 'Ovo', 'Bacon', 'Linguiça', 'Batata Palha', 'Molho', 'Presunto'])">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🍔🍟🥤</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">TRIO X-DUPLO</div>
+                        <div class="produto-descricao">Pão, 2 carnes, 1 ovo, queijo, bacon, batata palha, salada e molho
+                            + batata frita</div>
                         <div class="produto-preco">A partir de R$ 21,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="trios"
+                    onclick="mostrarDetalhes('TRIO X-TRIPLO', 26, ['Salada', 'Queijo', 'Carne', 'Ovo', 'Bacon', 'Linguiça', 'Batata Palha', 'Molho', 'Presunto'])">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🍔🍟🥤</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">TRIO X-TRIPLO</div>
+                        <div class="produto-descricao">Pão, 3 carnes, 2 ovos, queijo, bacon, batata palha, salada e
+                            molho + batata frita</div>
+                        <div class="produto-preco">A partir de R$ 26,00</div>
                     </div>
                 </div>
 
@@ -709,7 +883,7 @@
                     ]
                 })">
                     <div class="produto-imagem">
-                        <span class="material-icons" style="font-size: 48px;">restaurant</span>
+                        <span style="font-size: 48px;">🍟</span>
                     </div>
                     <div class="produto-info">
                         <div class="produto-nome">Batata Frita</div>
@@ -721,51 +895,257 @@
                 <!-- Adicionar Batata da Felicidade -->
                 <div class="produto-card" data-categoria="batatas" onclick="mostrarDetalhes('Batata da Felicidade', 50, [], {
                     tipo: 'batata_felicidade',
-                    descricao: 'Batata frita especial com blend de queijos, bacon, calabresa e cheddar'
+                    descricao: 'Iscas de frango, anéis de cebolas, nuggets, linguiça calabresas, ovo de codorna, batata fritas e molhos. (25 cm)'
                 })">
                     <div class="produto-imagem">
-                        <span class="material-icons" style="font-size: 48px;">mood</span>
+                        <span style="font-size: 48px;">🍟🍗</span>
                     </div>
                     <div class="produto-info">
                         <div class="produto-nome">Batata da Felicidade</div>
-                        <div class="produto-descricao">Batata especial com diversos acompanhamentos</div>
+                        <div class="produto-descricao">Iscas de frango, anéis de cebolas, nuggets, linguiça calabresas,
+                            ovo de codorna, batata fritas e molhos</div>
                         <div class="produto-preco">R$ 50,00</div>
                     </div>
                 </div>
 
-                <!-- Pizzas -->
-                <div class="produto-card" data-categoria="pizzas" onclick="mostrarDetalhes('Pizza Calabresa', 35, ['Cebola', 'Queijo'])">
+                <!-- Adicionar depois da Batata da Felicidade -->
+                <div class="produto-card" data-categoria="batatas" onclick="mostrarDetalhes('Isca da Felicidade', 25, [], {
+                    tipo: 'isca_felicidade',
+                    descricao: 'Iscas de frango e Batata Fritas. (Forma Tamanho G)'
+                })">
                     <div class="produto-imagem">
-                        <span class="material-icons" style="font-size: 48px;">local_pizza</span>
+                        <span style="font-size: 48px;">🍗🍟</span>
                     </div>
                     <div class="produto-info">
-                        <div class="produto-nome">Pizza Calabresa</div>
-                        <div class="produto-descricao">Calabresa, queijo, cebola</div>
-                        <div class="produto-preco">R$ 35,00</div>
+                        <div class="produto-nome">Isca da Felicidade</div>
+                        <div class="produto-descricao">Iscas de frango e Batata Fritas (Forma Tamanho G)</div>
+                        <div class="produto-preco">R$ 25,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="batatas" onclick="mostrarDetalhes('Combo Casal', 55, [], {
+                    tipo: 'combo_casal',
+                    descricao: '2 X-TUDOS, 4 Nuggets, 4 Anéis de Cebola, 4 Ovos de Codorna, Batata Frita, Molho + Refrigerante de 1L'
+                })">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🍔🍟🥤</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Combo Casal</div>
+                        <div class="produto-descricao">2 X-TUDOS, 4 Nuggets, 4 Anéis de Cebola, 4 Ovos de Codorna,
+                            Batata Frita,
+                            Molho + Refri 1L</div>
+                        <div class="produto-preco">R$ 55,00</div>
+                    </div>
+                </div>
+
+                <!-- Pizzas -->
+                <div class="produto-card" data-categoria="pizzas"
+                    onclick="mostrarDetalhes('Pizza Brotinho', 7, ['Queijo', 'Molho'])">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🍕</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Pizza Brotinho</div>
+                        <div class="produto-descricao">Pizza pequena com queijo e molho</div>
+                        <div class="produto-preco">R$ 7,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="pizzas"
+                    onclick="mostrarDetalhes('Pizza 30cm', 20, ['Queijo', 'Molho'])">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🍕</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Pizza 30cm</div>
+                        <div class="produto-descricao">Pizza grande com queijo e molho</div>
+                        <div class="produto-preco">R$ 20,00</div>
                     </div>
                 </div>
 
                 <!-- Açaí -->
-                <div class="produto-card" data-categoria="acai" onclick="mostrarDetalhes('Açaí 300ml', 12, ['Leite Condensado', 'Granola', 'Banana'])">
+                <div class="produto-card" data-categoria="acai" onclick="mostrarDetalhes('AÇAÍ NO POTINHO 250ml', 6, [], {
+                        tipo: 'acai',
+                        acompanhamentos: ['Granola', 'Paçoca', 'Amendoim'],
+                        caldas: ['Morango', 'Chocolate', 'Leite Condensado']
+                    })">
                     <div class="produto-imagem">
-                        <span class="material-icons" style="font-size: 48px;">icecream</span>
+                        <span style="font-size: 48px;">🍨</span>
                     </div>
                     <div class="produto-info">
-                        <div class="produto-nome">Açaí 300ml</div>
-                        <div class="produto-descricao">Açaí com acompanhamentos</div>
-                        <div class="produto-preco">R$ 12,00</div>
+                        <div class="produto-nome">AÇAÍ NO POTINHO</div>
+                        <div class="produto-descricao">250ml - Com opções de acompanhamentos e caldas</div>
+                        <div class="produto-preco">R$ 6,00</div>
                     </div>
                 </div>
 
                 <!-- Bebidas -->
-                <div class="produto-card" data-categoria="bebidas" onclick="adicionarAoCarrinho('Refrigerante', 6)">
+                <div class="produto-card" data-categoria="bebidas" onclick="adicionarAoCarrinho('Água', 2.50)">
                     <div class="produto-imagem">
-                        <span class="material-icons" style="font-size: 48px;">local_drink</span>
+                        <span style="font-size: 48px;">💧</span>
                     </div>
                     <div class="produto-info">
-                        <div class="produto-nome">Refrigerante</div>
+                        <div class="produto-nome">Água</div>
+                        <div class="produto-descricao">Água mineral sem gás</div>
+                        <div class="produto-preco">R$ 2,50</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="bebidas" onclick="adicionarAoCarrinho('Água com Gás', 3.50)">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">💧</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Água com Gás</div>
+                        <div class="produto-descricao">Água mineral gaseificada</div>
+                        <div class="produto-preco">R$ 3,50</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="bebidas" onclick="adicionarAoCarrinho('Água Tônica', 6)">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🥤</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Água Tônica</div>
+                        <div class="produto-descricao">Água tônica gelada</div>
+                        <div class="produto-preco">R$ 6,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="bebidas" onclick="adicionarAoCarrinho('Guaravita', 2.50)">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🧃</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Guaravita</div>
+                        <div class="produto-descricao">Guaravita gelada</div>
+                        <div class="produto-preco">R$ 2,50</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="bebidas"
+                    onclick="adicionarAoCarrinho('Refrigerante Lata', 6)">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🥤</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Refrigerante Lata</div>
                         <div class="produto-descricao">Coca-Cola, Guaraná, Fanta</div>
                         <div class="produto-preco">R$ 6,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="bebidas"
+                    onclick="adicionarAoCarrinho('Refrigerante 200ML', 3.50)">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🥤</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Refrigerante 200ML</div>
+                        <div class="produto-descricao">Coca-Cola, Guaraná, Fanta</div>
+                        <div class="produto-preco">R$ 3,50</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="bebidas" onclick="adicionarAoCarrinho('Coca-cola 1,5L', 12)">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🥤</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Coca-cola 1,5L</div>
+                        <div class="produto-descricao">Garrafa de Coca-Cola 1,5L</div>
+                        <div class="produto-preco">R$ 12,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="bebidas"
+                    onclick="adicionarAoCarrinho('Refrigerante Variado 1,5L', 10)">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🥤</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Refrigerante Variado 1,5L</div>
+                        <div class="produto-descricao">Guaraná, Fanta e outros</div>
+                        <div class="produto-preco">R$ 10,00</div>
+                    </div>
+                </div>
+
+                <!-- Cachorro Quente -->
+                <div class="produto-card" data-categoria="hotdogs"
+                    onclick="mostrarDetalhes('Cachorro Quente', 10, ['Salsicha', 'Batata Palha', 'Vinagrete', 'Milho', 'Ervilha'])">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🌭</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Cachorro Quente</div>
+                        <div class="produto-descricao">Pão, salsicha, batata palha, vinagrete, milho, ervilha e molho
+                        </div>
+                        <div class="produto-preco">R$ 10,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="hotdogs"
+                    onclick="mostrarDetalhes('Cachorro Quente Linguiça', 14, ['Linguiça', 'Batata Palha', 'Vinagrete', 'Milho', 'Ervilha'])">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🌭</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Cachorro Quente Linguiça</div>
+                        <div class="produto-descricao">Pão, linguiça, batata palha, vinagrete, milho, ervilha e molho
+                        </div>
+                        <div class="produto-preco">R$ 14,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="hotdogs"
+                    onclick="mostrarDetalhes('Cachorro Quente Duplo Salsicha', 12, ['Salsicha', 'Batata Palha', 'Vinagrete', 'Milho', 'Ervilha'])">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🌭</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Cachorro Quente Duplo Salsicha</div>
+                        <div class="produto-descricao">Pão, 2 salsichas, batata palha, vinagrete, milho, ervilha e molho
+                        </div>
+                        <div class="produto-preco">R$ 12,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="hotdogs"
+                    onclick="mostrarDetalhes('Cachorro Quente Duplo Linguiça', 12, ['Linguiça', 'Batata Palha', 'Vinagrete', 'Milho', 'Ervilha'])">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🌭</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">Cachorro Quente Duplo Linguiça</div>
+                        <div class="produto-descricao">Pão, 2 linguiças, batata palha, vinagrete, milho, ervilha e molho
+                        </div>
+                        <div class="produto-preco">R$ 12,00</div>
+                    </div>
+                </div>
+
+                <!-- Porções -->
+                <div class="produto-card" data-categoria="porcoes" onclick="adicionarAoCarrinho('10 Nuggets', 12)">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🍗</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">10 Nuggets</div>
+                        <div class="produto-descricao">Porção com 10 unidades de nuggets</div>
+                        <div class="produto-preco">R$ 12,00</div>
+                    </div>
+                </div>
+
+                <div class="produto-card" data-categoria="porcoes"
+                    onclick="adicionarAoCarrinho('10 Anéis de Cebola', 13)">
+                    <div class="produto-imagem">
+                        <span style="font-size: 48px;">🧅</span>
+                    </div>
+                    <div class="produto-info">
+                        <div class="produto-nome">10 Anéis de Cebola</div>
+                        <div class="produto-descricao">Porção com 10 anéis de cebola crocantes</div>
+                        <div class="produto-preco">R$ 13,00</div>
                     </div>
                 </div>
             </div>
@@ -816,32 +1196,32 @@
     </div>
 
     <script>
-    // Inicializar variáveis globais
-    let carrinho = [];
-    let total = 0;
-    let produtoAtual = null;
+        // Inicializar variáveis globais
+        let carrinho = [];
+        let total = 0;
+        let produtoAtual = null;
 
-    // Função para adicionar ao carrinho
-    function adicionarAoCarrinho(item, preco) {
-        carrinho.push({ item, preco, quantidade: 1 });
-        atualizarCarrinho();
-        atualizarContadorCarrinho();
-        
-        // Abrir o carrinho automaticamente
-        document.getElementById('carrinho-area').classList.add('aberto');
-    }
+        // Função para adicionar ao carrinho
+        function adicionarAoCarrinho(item, preco) {
+            carrinho.push({ item, preco, quantidade: 1 });
+            atualizarCarrinho();
+            atualizarContadorCarrinho();
 
-    // Função para atualizar o carrinho
-    function atualizarCarrinho() {
-        const carrinhoDiv = document.getElementById('itens-carrinho');
-        carrinhoDiv.innerHTML = '';
-        total = 0;
+            // Abrir o carrinho automaticamente
+            document.getElementById('carrinho-area').classList.add('aberto');
+        }
 
-        carrinho.forEach((produto, index) => {
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'carrinho-item';
-            
-            itemDiv.innerHTML = `
+        // Função para atualizar o carrinho
+        function atualizarCarrinho() {
+            const carrinhoDiv = document.getElementById('itens-carrinho');
+            carrinhoDiv.innerHTML = '';
+            total = 0;
+
+            carrinho.forEach((produto, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'carrinho-item';
+
+                itemDiv.innerHTML = `
                 <div class="carrinho-item-info">
                     <div>${produto.item}</div>
                     <div>R$ ${(produto.preco * produto.quantidade).toFixed(2)}</div>
@@ -852,234 +1232,243 @@
                     <button class="quantidade-btn" onclick="alterarQuantidade(${index}, 1)">+</button>
                 </div>
             `;
-            
-            carrinhoDiv.appendChild(itemDiv);
-            total += produto.preco * produto.quantidade;
-        });
 
-        document.querySelector('.total').textContent = `Total: R$ ${total.toFixed(2)}`;
-    }
+                carrinhoDiv.appendChild(itemDiv);
+                total += produto.preco * produto.quantidade;
+            });
 
-    // Função para alterar quantidade
-    function alterarQuantidade(index, delta) {
-        carrinho[index].quantidade += delta;
-        
-        if (carrinho[index].quantidade <= 0) {
-            carrinho.splice(index, 1);
-        }
-        
-        atualizarCarrinho();
-        atualizarContadorCarrinho();
-    }
-
-    // Função para atualizar o contador do carrinho
-    function atualizarContadorCarrinho() {
-        const contador = document.querySelector('.carrinho-contador');
-        const total = carrinho.reduce((sum, item) => sum + item.quantidade, 0);
-        contador.textContent = total;
-    }
-
-    // Função para fazer o pedido
-    function fazerPedido() {
-        if (carrinho.length === 0) {
-            alert('Seu carrinho está vazio!');
-            return;
+            document.querySelector('.total').textContent = `Total: R$ ${total.toFixed(2)}`;
         }
 
-        const nomeCliente = prompt('Digite o nome do cliente:');
-        if (!nomeCliente) {
-            alert('Por favor, insira o nome do cliente.');
-            return;
-        }
-        
-        const pedido = {
-            id: Date.now(),
-            nomeCliente: nomeCliente,
-            itens: carrinho.map(item => ({
-                item: item.item,
-                preco: item.preco,
-                quantidade: item.quantidade
-            })),
-            total: total,
-            status: 'Pendente',
-            horaPedido: new Date().toLocaleString()
-        };
-        
-        // Salvar pedido no localStorage
-        const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
-        pedidos.push(pedido);
-        localStorage.setItem('pedidos', JSON.stringify(pedidos));
-        
-        alert('Pedido realizado com sucesso!');
-        carrinho = [];
-        atualizarCarrinho();
-        atualizarContadorCarrinho();
-        toggleCarrinho(); // Fecha o carrinho após finalizar o pedido
-    }
+        // Função para alterar quantidade
+        function alterarQuantidade(index, delta) {
+            carrinho[index].quantidade += delta;
 
-    // Função para mostrar detalhes do produto
-    function mostrarDetalhes(nome, preco, exclusoes, opcoes = null) {
-        produtoAtual = { nome, preco, exclusoes: [], opcoes };
-        
-        const modal = document.getElementById('modal-detalhes');
-        const titulo = document.getElementById('modal-titulo');
-        const exclusoesDiv = document.getElementById('modal-exclusoes');
-        
-        titulo.textContent = nome;
-        let html = '';
-        
-        // Se for um trio, adicionar opções de bebida
-        if (nome.includes('TRIO')) {
-            html += `
-                <div class="opcoes-bebida">
-                    <h3>Escolha sua bebida:</h3>
-                    <label>
-                        <input type="radio" name="bebida" value="Refrigerante" checked> 
-                        Refrigerante (+ R$ 0,00)
-                    </label>
-                    <label>
-                        <input type="radio" name="bebida" value="Guaravita" data-preco="-4"> 
-                        Guaravita (- R$ 4,00)
-                    </label>
-                </div>
-            `;
-        }
-        
-        // Se for batata normal, mostrar opções de tamanho
-        if (opcoes && opcoes.tipo === 'batata') {
-            html += `
-                <div class="opcoes-tamanho">
-                    <h3>Escolha o tamanho:</h3>
-                    ${opcoes.tamanhos.map(tamanho => `
-                        <label>
-                            <input type="radio" name="tamanho" value="${tamanho.nome}" 
-                                data-preco="${tamanho.preco}" 
-                                ${tamanho.nome === 'P' ? 'checked' : ''}> 
-                            Tamanho ${tamanho.nome} - R$ ${tamanho.preco.toFixed(2)}
-                        </label>
-                    `).join('')}
-                </div>
-            `;
-        }
-        
-        // Se for batata da felicidade, mostrar descrição especial
-        if (opcoes && opcoes.tipo === 'batata_felicidade') {
-            html += `
-                <div class="descricao-especial">
-                    <h3>Batata da Felicidade</h3>
-                    <p>${opcoes.descricao}</p>
-                </div>
-            `;
-        }
-        
-        // Adicionar exclusões se houver
-        if (exclusoes.length > 0) {
-            html += `<div class="exclusoes-lista">
-                <h3>Remover ingredientes:</h3>
-                ${exclusoes.map(item => `
-                    <label>
-                        <input type="checkbox" value="${item}"> Remover ${item}
-                    </label>
-                `).join('')}
-            </div>`;
-        }
-        
-        exclusoesDiv.innerHTML = html;
-        modal.style.display = 'block';
-    }
+            if (carrinho[index].quantidade <= 0) {
+                carrinho.splice(index, 1);
+            }
 
-    // Função para confirmar pedido com exclusões
-    function confirmarPedido() {
-        const checkboxes = document.querySelectorAll('#modal-exclusoes input[type="checkbox"]:checked');
-        produtoAtual.exclusoes = Array.from(checkboxes).map(cb => cb.value);
-        
-        let descricao = produtoAtual.nome;
-        let precoFinal = produtoAtual.preco;
-        
-        // Se for um trio, adicionar a bebida escolhida
-        if (produtoAtual.nome.includes('TRIO')) {
-            const bebidaSelecionada = document.querySelector('input[name="bebida"]:checked');
-            const diferenca = Number(bebidaSelecionada.dataset.preco || 0);
-            precoFinal += diferenca;
-            descricao += ` com ${bebidaSelecionada.value}`;
+            atualizarCarrinho();
+            atualizarContadorCarrinho();
         }
-        
-        // Se for batata normal, adicionar o tamanho selecionado
-        if (produtoAtual.opcoes && produtoAtual.opcoes.tipo === 'batata') {
-            const tamanhoSelecionado = document.querySelector('input[name="tamanho"]:checked');
-            precoFinal = Number(tamanhoSelecionado.dataset.preco);
-            descricao += ` - Tamanho ${tamanhoSelecionado.value}`;
+
+        // Função para atualizar o contador do carrinho
+        function atualizarContadorCarrinho() {
+            const contador = document.querySelector('.carrinho-contador');
+            const total = carrinho.reduce((sum, item) => sum + item.quantidade, 0);
+            contador.textContent = total;
         }
-        
-        if (produtoAtual.exclusoes.length > 0) {
-            descricao += ` (Sem: ${produtoAtual.exclusoes.join(', ')})`;
-        }
-        
-        adicionarAoCarrinho(descricao, precoFinal);
-        document.getElementById('modal-detalhes').style.display = 'none';
-    }
 
-    // Fechar modal quando clicar no X
-    document.querySelector('.close').onclick = function() {
-        document.getElementById('modal-detalhes').style.display = 'none';
-    }
-
-    // Fechar modal quando clicar fora dele
-    window.onclick = function(event) {
-        const modal = document.getElementById('modal-detalhes');
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    }
-
-    // Função para filtrar produtos por categoria
-    function filtrarProdutos(categoria) {
-        // Remove a classe 'active' de todos os botões
-        document.querySelectorAll('.categoria-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-
-        // Adiciona a classe 'active' ao botão clicado
-        document.querySelector(`[data-categoria="${categoria}"]`).classList.add('active');
-
-        // Filtra os produtos
-        document.querySelectorAll('.produto-card').forEach(card => {
-            if (categoria === 'todos') {
-                card.style.display = 'block';
+        // Função para fazer o pedido
+        function fazerPedido() {
+            if (carrinho.length === 0) {
+                alert('Seu carrinho está vazio!');
                 return;
             }
-            
-            if (card.dataset.categoria === categoria) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
+
+            const nomeCliente = prompt('Digite o nome do cliente:');
+            if (!nomeCliente) {
+                alert('Por favor, insira o nome do cliente.');
+                return;
             }
-        });
-    }
 
-    // Adiciona os event listeners aos botões quando a página carrega
-    document.addEventListener('DOMContentLoaded', function() {
-        // Adiciona listeners para todos os botões de categoria
-        document.querySelectorAll('.categoria-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const categoria = this.dataset.categoria;
-                filtrarProdutos(categoria);
+            const pedido = {
+                id: Date.now(),
+                nomeCliente: nomeCliente,
+                itens: carrinho.map(item => ({
+                    item: item.item,
+                    preco: item.preco,
+                    quantidade: item.quantidade
+                })),
+                total: total,
+                status: 'Pendente',
+                horaPedido: new Date().toLocaleString()
+            };
+
+            // Salvar pedido no localStorage
+            const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+            pedidos.push(pedido);
+            localStorage.setItem('pedidos', JSON.stringify(pedidos));
+
+            alert('Pedido realizado com sucesso!');
+            carrinho = [];
+            atualizarCarrinho();
+            atualizarContadorCarrinho();
+            toggleCarrinho(); // Fecha o carrinho após finalizar o pedido
+        }
+
+        // Função para mostrar detalhes do produto
+        function mostrarDetalhes(nome, preco, exclusoes, opcoes = null) {
+            produtoAtual = { nome, preco, exclusoes: [], opcoes };
+
+            const modal = document.getElementById('modal-detalhes');
+            const titulo = document.getElementById('modal-titulo');
+            const exclusoesDiv = document.getElementById('modal-exclusoes');
+
+            titulo.textContent = nome;
+            let html = '';
+
+            // Preços específicos para cada trio
+            if (nome.includes('TRIO')) {
+                let precoRefri, precoGuaravita;
+
+                switch (nome) {
+                    case 'TRIO X-BURGUER':
+                        precoRefri = 18;
+                        precoGuaravita = 14;
+                        break;
+                    case 'TRIO X-TUDO':
+                        precoRefri = 22;
+                        precoGuaravita = 18;
+                        break;
+                    case 'TRIO X-DUPLO':
+                        precoRefri = 25;
+                        precoGuaravita = 21;
+                        break;
+                    case 'TRIO X-TRIPLO':
+                        precoRefri = 30;
+                        precoGuaravita = 26;
+                        break;
+                }
+
+                html += `
+                    <div class="opcoes-bebida">
+                        <h3>Escolha sua bebida:</h3>
+                        <label>
+                            <input type="radio" name="bebida" value="Refrigerante" data-preco="${precoRefri}" checked> 
+                            Com Refrigerante (R$ ${precoRefri},00)
+                        </label>
+                        <label>
+                            <input type="radio" name="bebida" value="Guaravita" data-preco="${precoGuaravita}"> 
+                            Com Guaravita (R$ ${precoGuaravita},00)
+                        </label>
+                    </div>
+                `;
+            }
+
+            // Adicionar exclusões se houver
+            if (exclusoes.length > 0) {
+                html += `<div class="exclusoes-lista">
+                    <h3>Remover ingredientes:</h3>
+                    ${exclusoes.map(item => `
+                        <label>
+                            <input type="checkbox" value="${item}"> Remover ${item}
+                        </label>
+                    `).join('')}
+                </div>`;
+            }
+
+            // Adicionar opções de açaí se houver
+            if (opcoes && opcoes.tipo === 'acai') {
+                html += `
+                    <div class="opcoes-acai">
+                        <h3>Escolha os acompanhamentos:</h3>
+                        ${opcoes.acompanhamentos.map(item => `
+                            <label>
+                                <input type="checkbox" name="acompanhamento" value="${item}"> 
+                                ${item}
+                            </label>
+                        `).join('')}
+                        
+                        <h3>Escolha sua calda:</h3>
+                        ${opcoes.caldas.map(calda => `
+                            <label>
+                                <input type="radio" name="calda" value="${calda}"> 
+                                ${calda}
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            exclusoesDiv.innerHTML = html;
+            modal.style.display = 'block';
+        }
+
+        // Função para confirmar pedido com exclusões
+        function confirmarPedido() {
+            const checkboxes = document.querySelectorAll('#modal-exclusoes input[type="checkbox"]:checked');
+            produtoAtual.exclusoes = Array.from(checkboxes).map(cb => cb.value);
+
+            let descricao = produtoAtual.nome;
+            let precoFinal = produtoAtual.preco;
+
+            // Se for um trio, usar o preço da bebida selecionada
+            if (produtoAtual.nome.includes('TRIO')) {
+                const bebidaSelecionada = document.querySelector('input[name="bebida"]:checked');
+                precoFinal = Number(bebidaSelecionada.dataset.preco);
+                descricao += ` com ${bebidaSelecionada.value}`;
+            }
+
+            if (produtoAtual.exclusoes.length > 0) {
+                descricao += ` (Sem: ${produtoAtual.exclusoes.join(', ')})`;
+            }
+
+            adicionarAoCarrinho(descricao, precoFinal);
+            document.getElementById('modal-detalhes').style.display = 'none';
+        }
+
+        // Fechar modal quando clicar no X
+        document.querySelector('.close').onclick = function () {
+            document.getElementById('modal-detalhes').style.display = 'none';
+        }
+
+        // Fechar modal quando clicar fora dele
+        window.onclick = function (event) {
+            const modal = document.getElementById('modal-detalhes');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Função para filtrar produtos por categoria
+        function filtrarProdutos(categoria) {
+            // Remove a classe 'active' de todos os botões
+            document.querySelectorAll('.categoria-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
+
+            // Adiciona a classe 'active' ao botão clicado
+            document.querySelector(`[data-categoria="${categoria}"]`).classList.add('active');
+
+            // Filtra os produtos
+            document.querySelectorAll('.produto-card').forEach(card => {
+                if (categoria === 'todos') {
+                    card.style.display = 'block';
+                    return;
+                }
+
+                if (card.dataset.categoria === categoria) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Adiciona os event listeners aos botões quando a página carrega
+        document.addEventListener('DOMContentLoaded', function () {
+            // Adiciona listeners para todos os botões de categoria
+            document.querySelectorAll('.categoria-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const categoria = this.dataset.categoria;
+                    filtrarProdutos(categoria);
+                });
+            });
+
+            // Inicializa mostrando todos os produtos
+            filtrarProdutos('todos');
+
+            // Inicializa o carrinho
+            atualizarCarrinho();
+            atualizarContadorCarrinho();
         });
 
-        // Inicializa mostrando todos os produtos
-        filtrarProdutos('todos');
-
-        // Inicializa o carrinho
-        atualizarCarrinho();
-        atualizarContadorCarrinho();
-    });
-
-    function toggleCarrinho() {
-        const carrinho = document.getElementById('carrinho-area');
-        carrinho.classList.toggle('aberto');
-    }
+        function toggleCarrinho() {
+            const carrinho = document.getElementById('carrinho-area');
+            carrinho.classList.toggle('aberto');
+        }
     </script>
 </body>
 
-</html> 
+</html>
