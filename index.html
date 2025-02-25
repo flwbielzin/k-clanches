@@ -1481,45 +1481,54 @@
 
         // Função para confirmar pedido com exclusões
         function confirmarPedido() {
-            const checkboxes = document.querySelectorAll('#modal-exclusoes input[type="checkbox"]:checked');
-            produtoAtual.exclusoes = Array.from(checkboxes).map(cb => cb.value);
-
             let descricao = produtoAtual.nome;
             let precoFinal = produtoAtual.preco;
 
-            // Se for um trio, usar o preço da bebida selecionada
-            if (produtoAtual.nome.includes('TRIO')) {
-                const bebidaSelecionada = document.querySelector('input[name="bebida"]:checked');
-                precoFinal = Number(bebidaSelecionada.dataset.preco);
-                descricao += ` com ${bebidaSelecionada.value}`;
-            }
-
-            // Se for batata, usar o preço do tamanho selecionado
-            if (produtoAtual.nome === 'Batata Frita') {
-                const tamanhoSelecionado = document.querySelector('input[name="tamanho"]:checked');
-                precoFinal = Number(tamanhoSelecionado.dataset.preco);
-                descricao += ` ${tamanhoSelecionado.value}`;
-            }
-
-            if (produtoAtual.exclusoes.length > 0) {
-                descricao += ` (Sem: ${produtoAtual.exclusoes.join(', ')})`;
-            }
-
-            // Se for açaí, usar o preço do tamanho selecionado e adicionar acompanhamentos e calda
+            // Se for açaí, tratar como adições (não como exclusões)
             if (produtoAtual.nome === 'AÇAÍ') {
                 const tamanhoSelecionado = document.querySelector('input[name="tamanho"]:checked');
                 const caldaSelecionada = document.querySelector('input[name="calda"]:checked');
                 const acompanhamentosSelecionados = Array.from(document.querySelectorAll('input[name="acompanhamento"]:checked')).map(cb => cb.value);
 
                 precoFinal = Number(tamanhoSelecionado.dataset.preco);
-                descricao += ` ${tamanhoSelecionado.value}`;
+                descricao += ` - ${tamanhoSelecionado.value}`;
+
+                let complementos = [];
 
                 if (caldaSelecionada) {
-                    descricao += ` com calda de ${caldaSelecionada.value}`;
+                    complementos.push(`calda de ${caldaSelecionada.value}`);
                 }
 
                 if (acompanhamentosSelecionados.length > 0) {
-                    descricao += ` e ${acompanhamentosSelecionados.join(', ')}`;
+                    complementos = complementos.concat(acompanhamentosSelecionados);
+                }
+
+                if (complementos.length > 0) {
+                    descricao += `, com ${complementos.join(', ')}`;
+                }
+            }
+            // Para outros produtos que têm exclusões
+            else {
+                const checkboxes = document.querySelectorAll('#modal-exclusoes input[type="checkbox"]:checked');
+                produtoAtual.exclusoes = Array.from(checkboxes).map(cb => cb.value);
+
+                // Se for um trio, usar o preço da bebida selecionada
+                if (produtoAtual.nome.includes('TRIO')) {
+                    const bebidaSelecionada = document.querySelector('input[name="bebida"]:checked');
+                    precoFinal = Number(bebidaSelecionada.dataset.preco);
+                    descricao += ` com ${bebidaSelecionada.value}`;
+                }
+
+                // Se for batata, usar o preço do tamanho selecionado
+                if (produtoAtual.nome === 'Batata Frita') {
+                    const tamanhoSelecionado = document.querySelector('input[name="tamanho"]:checked');
+                    precoFinal = Number(tamanhoSelecionado.dataset.preco);
+                    descricao += ` ${tamanhoSelecionado.value}`;
+                }
+
+                // Adicionar exclusões se houver
+                if (produtoAtual.exclusoes.length > 0) {
+                    descricao += ` (Sem: ${produtoAtual.exclusoes.join(', ')})`;
                 }
             }
 
