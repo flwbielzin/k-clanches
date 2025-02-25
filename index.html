@@ -874,12 +874,12 @@
                 </div>
 
                 <!-- Batatas -->
-                <div class="produto-card" data-categoria="batatas" onclick="mostrarDetalhes('Batata Frita', 5, [], {
+                <div class="produto-card" data-categoria="batatas" onclick="mostrarDetalhes('Batata Frita', 6, [], {
                     tipo: 'batata',
                     tamanhos: [
-                        { nome: 'P', preco: 5 },
-                        { nome: 'M', preco: 8 },
-                        { nome: 'G', preco: 12 }
+                        { nome: 'P', preco: 6 },
+                        { nome: 'M', preco: 10 },
+                        { nome: 'G', preco: 15 }
                     ]
                 })">
                     <div class="produto-imagem">
@@ -888,7 +888,7 @@
                     <div class="produto-info">
                         <div class="produto-nome">Batata Frita</div>
                         <div class="produto-descricao">Porção de batata frita crocante</div>
-                        <div class="produto-preco">A partir de R$ 5,00</div>
+                        <div class="produto-preco">A partir de R$ 6,00</div>
                     </div>
                 </div>
 
@@ -1381,6 +1381,22 @@
                 `;
             }
 
+            // Dentro da função mostrarDetalhes, adicione este trecho para opções de batata
+            if (opcoes && opcoes.tipo === 'batata') {
+                html += `
+                    <div class="opcoes-tamanho">
+                        <h3>Escolha o tamanho:</h3>
+                        ${opcoes.tamanhos.map(tamanho => `
+                            <label>
+                                <input type="radio" name="tamanho" value="${tamanho.nome}" data-preco="${tamanho.preco}"
+                                    ${tamanho.nome === 'P' ? 'checked' : ''}>
+                                Tamanho ${tamanho.nome} (R$ ${tamanho.preco},00)
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
             exclusoesDiv.innerHTML = html;
             modal.style.display = 'block';
         }
@@ -1402,6 +1418,13 @@
 
             if (produtoAtual.exclusoes.length > 0) {
                 descricao += ` (Sem: ${produtoAtual.exclusoes.join(', ')})`;
+            }
+
+            // Na função confirmarPedido, adicione esta lógica para batatas
+            if (produtoAtual.opcoes && produtoAtual.opcoes.tipo === 'batata') {
+                const tamanhoSelecionado = document.querySelector('input[name="tamanho"]:checked');
+                precoFinal = Number(tamanhoSelecionado.dataset.preco);
+                descricao = `${produtoAtual.nome} ${tamanhoSelecionado.value}`;
             }
 
             adicionarAoCarrinho(descricao, precoFinal);
