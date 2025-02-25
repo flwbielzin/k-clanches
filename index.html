@@ -282,12 +282,14 @@
 
         .modal-content {
             background: var(--card-bg);
-            margin: 10% auto;
+            margin: 5% auto;
             padding: 20px;
             width: 95%;
             max-width: 500px;
             border-radius: 15px;
             position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .close {
@@ -598,7 +600,7 @@
         }
 
         .opcoes-tamanho {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             padding: 15px;
             background: #3d3d3d;
             border-radius: 10px;
@@ -749,6 +751,64 @@
 
         .exclusoes-lista label:hover {
             background: #404040;
+        }
+
+        .opcoes-acai-scroll {
+            max-height: 150px;
+            overflow-y: auto;
+            padding-right: 10px;
+            margin: 10px 0;
+            background: #3d3d3d;
+            border-radius: 10px;
+        }
+
+        .secao-acai {
+            padding: 10px;
+        }
+
+        .secao-acai h3 {
+            margin: 0 0 10px;
+            color: var(--primary-color);
+            position: sticky;
+            top: 0;
+            background: #3d3d3d;
+            padding: 5px 0;
+            z-index: 1;
+        }
+
+        .secao-acai label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            margin: 5px 0;
+            background: #2d2d2d;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .secao-acai label:hover {
+            background: #404040;
+        }
+
+        /* Estilizar a barra de rolagem */
+        .opcoes-acai-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .opcoes-acai-scroll::-webkit-scrollbar-track {
+            background: #2d2d2d;
+            border-radius: 10px;
+        }
+
+        .opcoes-acai-scroll::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        .opcoes-acai-scroll::-webkit-scrollbar-thumb:hover {
+            background: var(--hover-color);
         }
     </style>
 </head>
@@ -965,8 +1025,14 @@
                 </div>
 
                 <!-- Açaí -->
-                <div class="produto-card" data-categoria="acai" onclick="mostrarDetalhes('AÇAÍ NO POTINHO 250ml', 6, [], {
+                <div class="produto-card" data-categoria="acai" onclick="mostrarDetalhes('AÇAÍ', 7, [], {
                         tipo: 'acai',
+                        tamanhos: [
+                            { nome: '200ml', preco: 7 },
+                            { nome: '300ml', preco: 10 },
+                            { nome: '500ml', preco: 13 },
+                            { nome: '700ml', preco: 16 }
+                        ],
                         acompanhamentos: ['Granola', 'Paçoca', 'Amendoim'],
                         caldas: ['Morango', 'Chocolate', 'Leite Condensado']
                     })">
@@ -974,9 +1040,9 @@
                         <span style="font-size: 48px;">🍨</span>
                     </div>
                     <div class="produto-info">
-                        <div class="produto-nome">AÇAÍ NO POTINHO</div>
-                        <div class="produto-descricao">250ml - Com opções de acompanhamentos e caldas</div>
-                        <div class="produto-preco">R$ 6,00</div>
+                        <div class="produto-nome">AÇAÍ</div>
+                        <div class="produto-descricao">Com opções de acompanhamentos e caldas</div>
+                        <div class="produto-preco">A partir de R$ 7,00</div>
                     </div>
                 </div>
 
@@ -1361,35 +1427,47 @@
             // Adicionar opções de açaí se houver
             if (opcoes && opcoes.tipo === 'acai') {
                 html += `
-                    <div class="opcoes-acai">
-                        <h3>Escolha os acompanhamentos:</h3>
-                        ${opcoes.acompanhamentos.map(item => `
+                    <div class="opcoes-tamanho">
+                        <h3>Escolha o tamanho:</h3>
+                        ${opcoes.tamanhos.map(tamanho => `
                             <label>
-                                <input type="checkbox" name="acompanhamento" value="${item}"> 
-                                ${item}
+                                <input type="radio" name="tamanho" value="${tamanho.nome}" data-preco="${tamanho.preco}" ${tamanho.nome === '200ml' ? 'checked' : ''}> 
+                                ${tamanho.nome} (R$ ${tamanho.preco},00)
                             </label>
                         `).join('')}
+                    </div>
+                    <div class="opcoes-acai-scroll">
+                        <div class="secao-acai">
+                            <h3>Escolha os acompanhamentos:</h3>
+                            ${opcoes.acompanhamentos.map(item => `
+                                <label>
+                                    <input type="checkbox" name="acompanhamento" value="${item}"> 
+                                    ${item}
+                                </label>
+                            `).join('')}
+                        </div>
                         
-                        <h3>Escolha sua calda:</h3>
-                        ${opcoes.caldas.map(calda => `
-                            <label>
-                                <input type="radio" name="calda" value="${calda}"> 
-                                ${calda}
-                            </label>
-                        `).join('')}
+                        <div class="secao-acai">
+                            <h3>Escolha sua calda:</h3>
+                            ${opcoes.caldas.map(calda => `
+                                <label>
+                                    <input type="radio" name="calda" value="${calda}"> 
+                                    ${calda}
+                                </label>
+                            `).join('')}
+                        </div>
                     </div>
                 `;
             }
 
-            // Dentro da função mostrarDetalhes, adicione este trecho para opções de batata
+            // Adicionar opções de tamanho se for batata
             if (opcoes && opcoes.tipo === 'batata') {
                 html += `
                     <div class="opcoes-tamanho">
                         <h3>Escolha o tamanho:</h3>
                         ${opcoes.tamanhos.map(tamanho => `
                             <label>
-                                <input type="radio" name="tamanho" value="${tamanho.nome}" data-preco="${tamanho.preco}"
-                                    ${tamanho.nome === 'P' ? 'checked' : ''}>
+                                <input type="radio" name="tamanho" value="${tamanho.nome}" data-preco="${tamanho.preco}" ${tamanho.nome === 'P' ? 'checked' : ''}> 
                                 Tamanho ${tamanho.nome} (R$ ${tamanho.preco},00)
                             </label>
                         `).join('')}
@@ -1416,15 +1494,33 @@
                 descricao += ` com ${bebidaSelecionada.value}`;
             }
 
+            // Se for batata, usar o preço do tamanho selecionado
+            if (produtoAtual.nome === 'Batata Frita') {
+                const tamanhoSelecionado = document.querySelector('input[name="tamanho"]:checked');
+                precoFinal = Number(tamanhoSelecionado.dataset.preco);
+                descricao += ` ${tamanhoSelecionado.value}`;
+            }
+
             if (produtoAtual.exclusoes.length > 0) {
                 descricao += ` (Sem: ${produtoAtual.exclusoes.join(', ')})`;
             }
 
-            // Na função confirmarPedido, adicione esta lógica para batatas
-            if (produtoAtual.opcoes && produtoAtual.opcoes.tipo === 'batata') {
+            // Se for açaí, usar o preço do tamanho selecionado e adicionar acompanhamentos e calda
+            if (produtoAtual.nome === 'AÇAÍ') {
                 const tamanhoSelecionado = document.querySelector('input[name="tamanho"]:checked');
+                const caldaSelecionada = document.querySelector('input[name="calda"]:checked');
+                const acompanhamentosSelecionados = Array.from(document.querySelectorAll('input[name="acompanhamento"]:checked')).map(cb => cb.value);
+
                 precoFinal = Number(tamanhoSelecionado.dataset.preco);
-                descricao = `${produtoAtual.nome} ${tamanhoSelecionado.value}`;
+                descricao += ` ${tamanhoSelecionado.value}`;
+
+                if (caldaSelecionada) {
+                    descricao += ` com calda de ${caldaSelecionada.value}`;
+                }
+
+                if (acompanhamentosSelecionados.length > 0) {
+                    descricao += ` e ${acompanhamentosSelecionados.join(', ')}`;
+                }
             }
 
             adicionarAoCarrinho(descricao, precoFinal);

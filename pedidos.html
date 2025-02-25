@@ -1,6 +1,7 @@
 <!-- pedidos.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +33,7 @@
             color: white;
             padding: 1rem;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .dashboard {
@@ -48,7 +49,7 @@
             background: white;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             height: fit-content;
         }
 
@@ -94,7 +95,7 @@
             background: white;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
@@ -121,7 +122,7 @@
             background: white;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease;
         }
 
@@ -167,9 +168,17 @@
             background-color: #e07b00;
         }
 
-        .pedido-card.pendente { border-left: 5px solid var(--warning-color); }
-        .pedido-card.em-preparo { border-left: 5px solid var(--primary-color); }
-        .pedido-card.concluido { border-left: 5px solid var(--success-color); }
+        .pedido-card.pendente {
+            border-left: 5px solid var(--warning-color);
+        }
+
+        .pedido-card.em-preparo {
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .pedido-card.concluido {
+            border-left: 5px solid var(--success-color);
+        }
 
         @media (max-width: 1024px) {
             .dashboard {
@@ -192,6 +201,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>K&C Lanche's - Gerenciamento de Pedidos</h1>
@@ -200,7 +210,8 @@
     <div class="dashboard">
         <aside class="sidebar">
             <div class="filtros">
-                <input type="text" class="search-box" placeholder="Buscar pedidos..." onkeyup="filtrarPedidos(this.value)">
+                <input type="text" class="search-box" placeholder="Buscar pedidos..."
+                    onkeyup="filtrarPedidos(this.value)">
                 <select onchange="filtrarPorStatus(this.value)">
                     <option value="todos">Todos os Status</option>
                     <option value="pendente">Pendente</option>
@@ -220,7 +231,7 @@
             </div>
         </aside>
 
-    <main>
+        <main>
             <div class="stats">
                 <div class="stat-card">
                     <h3>Pedidos Pendentes</h3>
@@ -237,7 +248,7 @@
             </div>
 
             <div class="pedidos-grid" id="pedidos-grid"></div>
-    </main>
+        </main>
     </div>
 
     <script>
@@ -256,12 +267,12 @@
             pedidos.forEach(pedido => {
                 const card = document.createElement('div');
                 card.className = `pedido-card ${pedido.status.toLowerCase()}`;
-                
+
                 // Atualizar contadores
                 if (pedido.status === 'Pendente') stats.pendente++;
                 if (pedido.status === 'Em Preparo') stats['em-preparo']++;
                 stats.totalDia += pedido.total;
-                
+
                 card.innerHTML = `
                     <h3>Pedido #${pedido.id}</h3>
                     <p><strong>Cliente:</strong> ${pedido.nomeCliente}</p>
@@ -311,7 +322,7 @@
             cards.forEach(card => {
                 if (status === 'todos') {
                     card.style.display = 'block';
-                    } else {
+                } else {
                     card.style.display = card.classList.contains(status) ? 'block' : 'none';
                 }
             });
@@ -329,7 +340,7 @@
 
         function limparPedidosConcluidos() {
             if (confirm('Deseja realmente remover todos os pedidos concluídos?')) {
-            const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+                const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
                 const pedidosAtivos = pedidos.filter(pedido => pedido.status !== 'Concluído');
                 localStorage.setItem('pedidos', JSON.stringify(pedidosAtivos));
                 atualizarPedidosGrid();
@@ -340,7 +351,7 @@
             const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
             let csvContent = "data:text/csv;charset=utf-8,";
             csvContent += "ID,Cliente,Data/Hora,Status,Itens,Total\n";
-            
+
             pedidos.forEach(pedido => {
                 const itens = pedido.itens.map(item => `${item.item}`).join('; ');
                 csvContent += `${pedido.id},${pedido.nomeCliente},${pedido.horaPedido},${pedido.status},"${itens}",${pedido.total}\n`;
@@ -357,9 +368,10 @@
 
         // Atualizar a cada 5 segundos
         setInterval(atualizarPedidosGrid, 5000);
-        
+
         // Primeira atualização
         atualizarPedidosGrid();
     </script>
 </body>
+
 </html>
