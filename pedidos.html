@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./styles.css">
     <title>K&C Lanche's - Gerenciamento de Pedidos</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
     <style>
         :root {
             --primary-color: #ff8c00;
@@ -199,6 +201,42 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .acoes-pedidos {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--card-bg);
+            border-radius: 10px;
+        }
+
+        .acao-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .acao-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+        }
+
+        .acao-btn.limpar {
+            background: #dc3545;
+        }
+
+        .acao-btn.limpar:hover {
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+        }
     </style>
 </head>
 
@@ -224,9 +262,9 @@
                     <span class="material-icons">delete_sweep</span>
                     Limpar Concluídos
                 </button>
-                <button onclick="exportarPedidos()">
+                <button onclick="exportarRelatorio()">
                     <span class="material-icons">download</span>
-                    Exportar
+                    Exportar Relatório
                 </button>
             </div>
         </aside>
@@ -347,23 +385,81 @@
             }
         }
 
-        function exportarPedidos() {
+        function exportarRelatorio() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Configurações iniciais
+            const dataAtual = new Date().toLocaleDateString();
+            const horaAtual = new Date().toLocaleTimeString();
+
+            // Título
+            doc.setFontSize(20);
+            doc.text('Relatório de Vendas - K&C Lanches', 15, 20);
+
+            // Data e Hora
+            doc.setFontSize(12);
+            doc.text(`Data: ${dataAtual}`, 15, 30);
+            doc.text(`Hora: ${horaAtual}`, 15, 37);
+
+            // Buscar pedidos do localStorage
             const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
-            let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent += "ID,Cliente,Data/Hora,Status,Itens,Total\n";
+
+            // Calcular totais
+            let totalVendas = 0;
+            let itensPorProduto = {};
 
             pedidos.forEach(pedido => {
-                const itens = pedido.itens.map(item => `${item.item}`).join('; ');
-                csvContent += `${pedido.id},${pedido.nomeCliente},${pedido.horaPedido},${pedido.status},"${itens}",${pedido.total}\n`;
+                totalVendas += pedido.total;
+                pedido.itens.forEach(item => {
+                    const nomeProduto = item.item.split(' - ')[0]; // Pega só o nome base do produto
+                    if (!itensPorProduto[nomeProduto]) {
+                        itensPorProduto[nomeProduto] = 0;
+                    }
+                    itensPorProduto[nomeProduto] += item.quantidade;
+                });
             });
 
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", `pedidos_${new Date().toLocaleDateString()}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            // Resumo geral
+            doc.text('Resumo Geral:', 15, 50);
+            doc.text(`Total de Pedidos: ${pedidos.length}`, 15, 60);
+            doc.text(`Total em Vendas: R$ ${totalVendas.toFixed(2)}`, 15, 67);
+
+            // Tabela de produtos vendidos
+            const produtosData = Object.entries(itensPorProduto).map(([produto, quantidade]) => [
+                produto,
+                quantidade.toString()
+            ]);
+
+            doc.autoTable({
+                head: [['Produto', 'Quantidade Vendida']],
+                body: produtosData,
+                startY: 80,
+                theme: 'grid',
+                headStyles: { fillColor: [255, 140, 0] }
+            });
+
+            // Tabela de pedidos detalhados
+            const pedidosData = pedidos.map(pedido => [
+                pedido.horaPedido,
+                pedido.nomeCliente,
+                `R$ ${pedido.total.toFixed(2)}`,
+                pedido.status
+            ]);
+
+            doc.addPage();
+            doc.text('Detalhamento dos Pedidos:', 15, 20);
+
+            doc.autoTable({
+                head: [['Data/Hora', 'Cliente', 'Valor', 'Status']],
+                body: pedidosData,
+                startY: 30,
+                theme: 'grid',
+                headStyles: { fillColor: [255, 140, 0] }
+            });
+
+            // Salvar o PDF
+            doc.save(`relatorio_vendas_${dataAtual.replace(/\//g, '-')}.pdf`);
         }
 
         // Atualizar a cada 5 segundos
