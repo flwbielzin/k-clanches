@@ -71,19 +71,23 @@
         }
 
         .action-buttons button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             width: 100%;
             padding: 12px;
-            background-color: var(--primary-color);
-            color: white;
+            margin: 5px 0;
             border: none;
             border-radius: 5px;
+            background: var(--primary-color);
+            color: white;
             cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
         }
 
         .action-buttons button:hover {
-            background-color: #e07b00;
+            background: var(--hover-color);
+            transform: translateY(-2px);
         }
 
         .stats {
@@ -266,6 +270,10 @@
                     <span class="material-icons">download</span>
                     Exportar Relatório
                 </button>
+                <button onclick="conectarImpressora()">
+                    <span class="material-icons">print</span>
+                    Conectar Impressora
+                </button>
             </div>
         </aside>
 
@@ -290,6 +298,80 @@
     </div>
 
     <script>
+        let impressoraBluetooth = null;
+
+        async function conectarImpressora() {
+            try {
+                const device = await navigator.bluetooth.requestDevice({
+                    filters: [
+                        { services: ['000018f0-0000-1000-8000-00805f9b34fb'] }, // Identificador comum para impressoras térmicas
+                        { namePrefix: 'Printer' }
+                    ]
+                });
+
+                const server = await device.gatt.connect();
+                const service = await server.getPrimaryService('000018f0-0000-1000-8000-00805f9b34fb');
+                impressoraBluetooth = await service.getCharacteristic('00002af1-0000-1000-8000-00805f9b34fb');
+
+                alert('Impressora conectada com sucesso!');
+            } catch (error) {
+                alert('Erro ao conectar com a impressora: ' + error);
+            }
+        }
+
+        async function imprimirNotaFiscal(pedido) {
+            if (!impressoraBluetooth) {
+                alert('Impressora não conectada. Por favor, conecte uma impressora primeiro.');
+                return;
+            }
+
+            try {
+                const nota = gerarTextoNotaFiscal(pedido);
+                const encoder = new TextEncoder();
+                const data = encoder.encode(nota);
+                await impressoraBluetooth.writeValue(data);
+
+                // Comandos para cortar o papel (pode variar dependendo da impressora)
+                await impressoraBluetooth.writeValue(new Uint8Array([0x1D, 0x56, 0x41, 0x10]));
+            } catch (error) {
+                alert('Erro ao imprimir: ' + error);
+            }
+        }
+
+        function gerarTextoNotaFiscal(pedido) {
+            const data = new Date().toLocaleDateString();
+            const hora = new Date().toLocaleTimeString();
+
+            let nota = `
+===============================
+       K&C LANCHE'S
+       NOTA FISCAL
+===============================
+Data: ${data}
+Hora: ${hora}
+Pedido #${pedido.id}
+Cliente: ${pedido.nomeCliente}
+-------------------------------
+ITENS:
+`;
+
+            pedido.itens.forEach(item => {
+                nota += `
+${item.quantidade}x ${item.item}
+R$ ${(item.preco * item.quantidade).toFixed(2)}`;
+            });
+
+            nota += `
+-------------------------------
+Total: R$ ${pedido.total.toFixed(2)}
+===============================
+      Volte Sempre!
+===============================
+`;
+
+            return nota;
+        }
+
         function atualizarPedidosGrid() {
             const pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
             const grid = document.getElementById('pedidos-grid');
@@ -335,6 +417,10 @@
                                 Concluir
                             </button>
                         ` : ''}
+                        <button onclick="imprimirNotaFiscal(${JSON.stringify(pedido).replace(/"/g, '&quot;')})">
+                            <span class="material-icons">receipt</span>
+                            Imprimir
+                        </button>
                     </div>
                 `;
 
